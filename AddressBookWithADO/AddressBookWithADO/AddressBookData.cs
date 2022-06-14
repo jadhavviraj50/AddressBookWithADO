@@ -153,7 +153,7 @@ namespace AddressBook_ADO.NET
             int effectedRow = command.ExecuteNonQuery();
             if (effectedRow == 1)
             {
-                string query = @"Select Address from AddressBook where FirstName='Shravanthi';";
+                string query = @"Select Address from AddressBook where FirstName='Mayuri';";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 object res = cmd.ExecuteScalar();
                 connection.Close();
@@ -161,6 +161,21 @@ namespace AddressBook_ADO.NET
             }
             connection.Close();
             return (addressmodel.Address);
+        }
+
+
+        // method to Delete employee details
+        
+
+        public void deleteEmployeeDetails()
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressBookForADO; Integrated Security = True; TrustServerCertificate=True;");
+            connection.Open();
+            string query = @"DELETE FROM AddressBook where FirstName = 'Mitali'";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            
         }
     }
 }
