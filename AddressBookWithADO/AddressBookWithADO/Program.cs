@@ -6,7 +6,7 @@ Console.WriteLine("Welcome to AddressBook ADO.NET!");
 AddressBookData addressBookData = new AddressBookData();
 
 
-Console.WriteLine("Select option\n1)Create AddrssBookServiceDatabase\n2)Create AddressBookTable\n3)Inserting Details to DataBase\n4)retreiv Details From dataBase");
+Console.WriteLine("Select option\n1)Create AddrssBookServiceDatabase\n2)Create AddressBookTable\n3)Inserting Details to DataBase\n4)retreiv Details From dataBase\n5)Update Contacts");
 int op = Convert.ToInt16(Console.ReadLine());
 switch (op)
 {
@@ -31,6 +31,11 @@ switch (op)
         break;
     case 4:
         addressBookData.GetAllContact();
+        break;
+    case 5:
+        string UpdatedAddress = addressBookData.updateEmployeeDetails();
+        Console.WriteLine(UpdatedAddress);
+        Console.WriteLine("Record Updated successfully");
         break;
     default:
         Console.WriteLine("Please choose the correct option!");

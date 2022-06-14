@@ -139,7 +139,32 @@ namespace AddressBook_ADO.NET
                 Console.WriteLine(e.Message);
             }
         }
+
+        
+        // method to Update detail of already existing details
+        public string updateEmployeeDetails()
+        {
+            AddressBookModel addressmodel = new AddressBookModel();
+
+            SqlConnection Connection = new SqlConnection(@"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+            connection.Open();
+            SqlCommand command = new SqlCommand("update AddressBook set Address='Rasayani' where FirstName='Mayuri'", connection);
+
+            int effectedRow = command.ExecuteNonQuery();
+            if (effectedRow == 1)
+            {
+                string query = @"Select Address from AddressBook where FirstName='Shravanthi';";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                object res = cmd.ExecuteScalar();
+                connection.Close();
+                addressmodel.Address = (string)res;
+            }
+            connection.Close();
+            return (addressmodel.Address);
+        }
     }
-
-
 }
+    
+
+
+
