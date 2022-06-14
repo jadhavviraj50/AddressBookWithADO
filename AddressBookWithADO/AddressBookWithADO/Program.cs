@@ -6,7 +6,8 @@ Console.WriteLine("Welcome to AddressBook ADO.NET!");
 AddressBookData addressBookData = new AddressBookData();
 
 
-Console.WriteLine("Select option\n1)Create AddrssBookServiceDatabase\n2)Create AddressBookTable\n3)Inserting Details to DataBase\n4)retrieve Details From dataBase\n5)Update Contacts\n6)Delete Contact\n7)Get Contact By City\n8)Get Contact By State\n9)Size of addressbook by city/state");
+Console.WriteLine("Select option\n1)Create AddrssBookServiceDatabase\n2)Create AddressBookTable\n3)Inserting Details to DataBase\n4)retrieve Details From dataBase\n5)Update Contacts\n6)Delete Contact\n7)Get Contact By City\n8)Get Contact By State\n9)Size of addressbook by city/state" +
+    "\n10)Get contact for city sorted by name ");
 int op = Convert.ToInt16(Console.ReadLine());
 switch (op)
 {
@@ -54,6 +55,10 @@ switch (op)
         Console.WriteLine("Count of Records for given City :" + countCity);
         int CountState = addressBookData.CountOfEmployeeDetailsByState();
         Console.WriteLine("Count of Records for given State :" + CountState);
+        break;
+    case 10:
+        Console.WriteLine("Get Contacts for given City sorted by FirstName");
+        addressBookData.GetAllContacsSortByName();
         break;
 
     default:
