@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -45,5 +46,100 @@ namespace AddressBook_ADO.NET
         }
 
 
+        //Created Connection file
+
+        public const string ConnFile = @"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressbookForADO; Integrated Security = True;";
+        SqlConnection connection = new SqlConnection(ConnFile);
+        /// <summary>
+        /// Method to insert data in database
+        /// </summary>
+        /// <param name="model"></param>
+        public bool AddContact(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("SpAddressBook", this.connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FirstName", model.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", model.LastName);
+                    cmd.Parameters.AddWithValue("@Address", model.Address);
+                    cmd.Parameters.AddWithValue("@City", model.City);
+                    cmd.Parameters.AddWithValue("@State", model.State);
+                    cmd.Parameters.AddWithValue("@Zip", model.Zip);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", model.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@Email", model.Email);
+
+
+                    this.connection.Open();
+
+                    var result = cmd.ExecuteNonQuery();
+                    this.connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+
+        /// Fetching all data from Database
+
+        public void GetAllContact()
+        {
+            try
+            {
+                AddressBookModel addressmodel = new AddressBookModel();
+                using (this.connection)
+                {
+                    string Query = @"Select * from AddressBook";
+                    SqlCommand cmd = new SqlCommand(Query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader datareader = cmd.ExecuteReader();
+                    if (datareader.HasRows)
+                    {
+                        while (datareader.Read())
+                        {
+                            addressmodel.AddressBookId = datareader.GetInt32(0);
+                            addressmodel.FirstName = datareader.GetString(1);
+                            addressmodel.LastName = datareader.GetString(2);
+                            addressmodel.Address = datareader.GetString(3);
+                            addressmodel.City = datareader.GetString(4);
+                            addressmodel.State = datareader.GetString(5);
+                            addressmodel.Zip = datareader.GetString(6);
+                            addressmodel.PhoneNumber = datareader.GetString(7);
+                            addressmodel.Email = datareader.GetString(8);
+
+                            Console.WriteLine(addressmodel.FirstName + " " +
+                                addressmodel.LastName + " " +
+                                addressmodel.Address + " " +
+                                addressmodel.City + " " +
+                                addressmodel.State + " " +
+                                addressmodel.Zip + " " +
+                                addressmodel.PhoneNumber + " " +
+                                addressmodel.Email + " "
+
+                                );
+                            Console.WriteLine();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
+
+
 }
