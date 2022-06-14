@@ -7,7 +7,7 @@ AddressBookData addressBookData = new AddressBookData();
 
 
 Console.WriteLine("Select option\n1)Create AddrssBookServiceDatabase\n2)Create AddressBookTable\n3)Inserting Details to DataBase\n4)retrieve Details From dataBase\n5)Update Contacts\n6)Delete Contact\n7)Get Contact By City\n8)Get Contact By State\n9)Size of addressbook by city/state" +
-    "\n10)Get contact for city sorted by name\n11)Added Columns Of Type & Name\n12)Count records of family ");
+    "\n10)Get contact for city sorted by name\n11)Added Columns Of Type & Name\n12)Count records of family\n13)Add Contact to both family & friend");
 int op = Convert.ToInt16(Console.ReadLine());
 switch (op)
 {
@@ -67,6 +67,10 @@ switch (op)
     case 12:
         int countByType = addressBookData.CountOfEmployeeDetailsByType();
         Console.WriteLine("Count of Records by Type Family :" + countByType);
+        break;
+    case 13:
+        addressBookData.AddContactAsFriendAndFamily();
+        Console.WriteLine("Added Contact to both Family and Friend");
         break;
 
     default:

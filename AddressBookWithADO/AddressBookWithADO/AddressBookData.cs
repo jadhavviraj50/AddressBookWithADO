@@ -339,6 +339,18 @@ namespace AddressBook_ADO.NET
             int Count = (int)res;
             return Count;
         }
+
+        //UC_11_Adding a Person to Both Friend and Family Type
+        public void AddContactAsFriendAndFamily()
+        {
+            SqlConnection Connection = new SqlConnection(@"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+            connection.Open();
+            string query = @"Insert into AddressBook Values ('Mitali','Jadhav','Shelu','Karjat','Maharashtra','410207','121413711821','Mitalijadhav@gmail.com','Mitali Jadhav','Friend'),
+                            ('Mitali','Jadhav','Shelu','Karjat','Maharashtra','410207','121413711821','Mitalijadhav@gmail.com','Mitali Jadhav','Family');";
+            SqlCommand command = new SqlCommand(query, connection);
+            object res = command.ExecuteScalar();
+            connection.Close();
+        }
     }
 }
     
