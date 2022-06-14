@@ -8,6 +8,7 @@ namespace AddressBook_ADO.NET
 {
     public class AddressBookModel
     {
+        public int ID { get; set; }
         public int AddressBookId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

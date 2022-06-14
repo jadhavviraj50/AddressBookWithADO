@@ -177,6 +177,80 @@ namespace AddressBook_ADO.NET
             connection.Close();
             
         }
+
+        public void GetAllContactByCity()
+        {
+            try
+            {
+                AddressBookModel addressmodel = new AddressBookModel();
+                SqlConnection Connection = new SqlConnection(@"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+                using (this.connection)
+                {
+                    string Query = @"Select * from AddressBook where City='Panvel';";
+                    SqlCommand cmd = new SqlCommand(Query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader datareader = cmd.ExecuteReader();
+                    if (datareader.HasRows)
+                    {
+                        while (datareader.Read())
+                        {
+                            addressmodel.ID = datareader.GetInt32(0);
+                            addressmodel.FirstName = datareader.GetString(1);
+                            addressmodel.LastName = datareader.GetString(2);
+                            addressmodel.Address = datareader.GetString(3);
+                            addressmodel.City = datareader.GetString(4);
+                            addressmodel.State = datareader.GetString(5);
+                            addressmodel.Zip = datareader.GetString(6);
+                            addressmodel.PhoneNumber = datareader.GetString(7);
+                            addressmodel.Email = datareader.GetString(8);
+
+                            Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8}", addressmodel.ID, addressmodel.FirstName, addressmodel.LastName, addressmodel.Address, addressmodel.City, addressmodel.State, addressmodel.Zip, addressmodel.PhoneNumber, addressmodel.Email);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public void GetAllContactByState()
+        {
+            try
+            {
+                AddressBookModel addressmodel = new AddressBookModel();
+                SqlConnection Connection = new SqlConnection(@"Data Source=DESKTOP-2DTGFII; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+                using (this.connection)
+                {
+                    string Query = @"Select * from AddressBook where State='Alberta';";
+                    SqlCommand cmd = new SqlCommand(Query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader datareader = cmd.ExecuteReader();
+                    if (datareader.HasRows)
+                    {
+                        while (datareader.Read())
+                        {
+                            addressmodel.ID = datareader.GetInt32(0);
+                            addressmodel.FirstName = datareader.GetString(1);
+                            addressmodel.LastName = datareader.GetString(2);
+                            addressmodel.Address = datareader.GetString(3);
+                            addressmodel.City = datareader.GetString(4);
+                            addressmodel.State = datareader.GetString(5);
+                            addressmodel.Zip = datareader.GetString(6);
+                            addressmodel.PhoneNumber = datareader.GetString(7);
+                            addressmodel.Email = datareader.GetString(8);
+
+                            Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8}", addressmodel.ID, addressmodel.FirstName, addressmodel.LastName, addressmodel.Address, addressmodel.City, addressmodel.State, addressmodel.Zip, addressmodel.PhoneNumber, addressmodel.Email);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
 }
     
